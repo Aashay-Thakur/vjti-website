@@ -1,5 +1,6 @@
 const imageContainer = document.querySelector(".image-container");
 
+//* On Click events, to let the browser know to scroll to the next image
 const chevronLeft = document.querySelector(".chevron-left");
 const chevronRight = document.querySelector(".chevron-right");
 
@@ -11,20 +12,17 @@ chevronLeft.addEventListener("click", (e) => {
 	imageContainer.scrollLeft -= imageContainer.clientWidth;
 });
 
-const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
-	const { top, left, bottom, right } = el.getBoundingClientRect();
-	const { innerHeight, innerWidth } = window;
-	return partiallyVisible
-		? ((top > 0 && top < innerHeight) ||
-				(bottom > 0 && bottom < innerHeight)) &&
-				((left > 0 && left < innerWidth) ||
-					(right > 0 && right < innerWidth))
-		: top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
-};
+//* This is an observer, it will add a class of "show" to the element when it is in view
+//* And the CSS will animate it in
+const observer = new IntersectionObserver((entries) => {
+	entries.forEach((entry) => {
+		if (entry.isIntersecting) {
+			entry.target.classList.add("show");
+		}
+	});
+});
 
-const infoContainer = document.querySelector(".info-container");
-document.addEventListener("scroll", (e) => {
-	if (elementIsVisibleInViewport(infoContainer)) {
-		infoContainer.classList.add("active");
-	}
+const hiddenElements = document.querySelectorAll(".hidden");
+hiddenElements.forEach((element) => {
+	observer.observe(element);
 });

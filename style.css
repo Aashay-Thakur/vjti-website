@@ -197,6 +197,7 @@ body {
 
 	transition: 1s ease-in-out 0.5s;
 	transform-origin: left;
+	filter: blur(5px);
 	transform: translateX(-150%);
 }
 
@@ -222,11 +223,12 @@ body {
 	transform: scaleY(0);
 }
 
-.info-container.active .title-container h3 {
+.info-container.show .title-container h3 {
+	filter: blur(0px);
 	transform: translateX(10px);
 }
 
-.info-container.active .title-container span {
+.info-container.show .title-container span {
 	transform: scaleY(1);
 }
 
@@ -312,4 +314,110 @@ footer {
 	color: var(--theme-primary);
 	box-shadow: #555 0 0 15px 5px;
 	padding: 2rem;
+}
+
+.footer-links {
+	height: max-content;
+	position: relative;
+}
+
+.footer-links::before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 206px;
+	height: 100%;
+	background-color: var(--theme-primary);
+	left: calc(0% - 220px);
+	top: 0;
+	z-index: 999;
+}
+
+.footer-links::after {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 6px;
+	height: 100%;
+	background-color: var(--theme-secondary);
+	left: calc(0% - 20px);
+	top: 0;
+	z-index: 9999;
+
+	transform: scaleY(0);
+	transition: transform 0.5s ease-in-out;
+	transform-origin: top;
+}
+
+.footer-links.show::after {
+	transform: scaleY(1);
+}
+
+.footer-links ul li {
+	filter: blur(5px);
+	transform: translateX(-150px);
+	transition: all 0.5s ease-in-out;
+}
+
+.footer-links.show ul li {
+	filter: blur(0px);
+	transform: translateX(0px);
+}
+
+.footer-links.show ul li:nth-child(1) {
+	transition-delay: 0.2s;
+}
+.footer-links.show ul li:nth-child(2) {
+	transition-delay: 0.4s;
+}
+.footer-links.show ul li:nth-child(3) {
+	transition-delay: 0.6s;
+}
+.footer-links.show ul li:nth-child(4) {
+	transition-delay: 0.8s;
+}
+.footer-links.show ul li:nth-child(5) {
+	transition-delay: 1s;
+}
+.footer-links.show ul li:nth-child(6) {
+	transition-delay: 1.2s;
+}
+
+.footer-social {
+	height: max-content;
+	width: max-content;
+	position: relative;
+}
+
+.footer-social::before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 50px;
+	background-color: var(--theme-primary);
+	transform: translateY(-100px);
+	z-index: 999;
+}
+
+.footer-social ul li {
+	transform: translateY(-100px);
+	transition: transform 1s ease-out;
+}
+
+.footer-social.show ul li {
+	transform: translateY(0px);
+}
+
+.footer-social.show ul li:nth-child(1) {
+	transition-delay: 0.2s;
+}
+.footer-social.show ul li:nth-child(2) {
+	transition-delay: 0.3s;
+}
+.footer-social.show ul li:nth-child(3) {
+	transition-delay: 0.4s;
+}
+.footer-social.show ul li:nth-child(4) {
+	transition-delay: 0.5s;
 }
