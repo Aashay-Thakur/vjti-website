@@ -19,6 +19,16 @@ const observer = new IntersectionObserver((entries) => {
 		if (entry.isIntersecting) {
 			entry.target.classList.add("show");
 		}
+		// Remove transition delay from social icons after their inital animation
+		if (entry.target.classList.contains("footer-social")) {
+			setTimeout(() => {
+				document
+					.querySelectorAll(".footer-social ul li")
+					.forEach((li) => {
+						li.style.transitionDelay = "0s";
+					});
+			}, 1000);
+		}
 	});
 });
 
